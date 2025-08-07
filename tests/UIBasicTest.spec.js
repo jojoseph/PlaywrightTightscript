@@ -1,4 +1,5 @@
 import { test, expect, chromium } from '@playwright/test';
+import { only } from 'node:test';
 
 test('Load Browser in URL', async () =>
 {
@@ -14,6 +15,8 @@ await expect(page).toHaveTitle('LoginPage Practise | Rahul Shetty Academy');
 await page.locator("#username").fill("rahulshetty");
 await page.locator("[type='password']").fill("learning");
 await page.locator("#signInBtn").click();
+console.log(await page.locator("[style*= 'block']").textContent());
+await expect(page.locator("[style*= 'block']")).toContainText("Incorrect");
 await page.waitForTimeout(5000)
 await browser.close();
 });
